@@ -1,0 +1,26 @@
+@use "../../sass/abstracts/mixings";
+
+.form__container {
+  width: 70%;
+  height: auto;
+  @include mixings.flexContainer(column);
+  gap: 1rem;
+
+  h1 {
+    font-size: 30px;
+  }
+  @media (max-width: 600px) {
+    width: 95%;
+  }
+}
+
+.input_container {
+  width: 100%;
+  position: relative;
+}
+.btn-show-pass {
+  position: absolute;
+  right: 3%;
+  bottom: 24%;
+  color: gray;
+}

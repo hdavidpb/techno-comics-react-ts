@@ -1,7 +1,12 @@
+import { BrowserRouter } from "react-router-dom";
+import MainRoutes from "./routes/MainRoutes";
+
 function App() {
   return (
-    <div>
-      <h1>Techno Apes</h1>
+    <div className="app__container">
+      <BrowserRouter>
+        <MainRoutes />
+      </BrowserRouter>
     </div>
   );
 }

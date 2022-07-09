@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import LoginForm from "../../components/Login/LoginForm";
 
 const UserRegister = () => {
@@ -7,8 +7,7 @@ const UserRegister = () => {
       <div className="register__layaout__container">
         <div className="layaout__bg__image"></div>
         <div className="layaout_form_container">
-          <LoginForm isLogin={true} title="Bienvenido" />
-          {/* <LoginForm isLogin={false} title="Registrate" /> */}
+          <LoginForm />
         </div>
       </div>
     </div>

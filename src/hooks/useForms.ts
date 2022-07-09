@@ -1,7 +1,10 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { registerUsers, userLogin } from "../redux/features/users/services";
 import { ILoginValues } from "./interfaces";
+import * as Yup from "yup";
+import { AppDispatch } from "../redux/store";
 
 interface IProps {
   isLogin: boolean;
@@ -9,6 +12,7 @@ interface IProps {
 
 const useForms = ({ isLogin }: IProps) => {
   const [showPassVisibility, setShowPassVisibility] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   const initialValues: ILoginValues = {
     email: "",
@@ -16,15 +20,19 @@ const useForms = ({ isLogin }: IProps) => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().required(),
+    email: Yup.string()
+      .email("Debe digitar una dirección de email valida")
+      .required("*Requerido"),
+    password: Yup.string()
+      .required("*Requerido")
+      .min(6, "Contraseña debil, minimo 6 caracteres"),
   });
 
   const onSubmit = (values: ILoginValues) => {
     if (isLogin) {
-      console.log("TE VAS A LOGUEAR CON : ", values);
+      dispatch(userLogin(values));
     } else {
-      console.log("TE VAS A REGISTRAR CON : ", values);
+      dispatch(registerUsers(values));
     }
 
     resetForm({

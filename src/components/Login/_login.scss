@@ -4,7 +4,7 @@
   width: 70%;
   height: auto;
   @include mixings.flexContainer(column);
-  gap: 1rem;
+  gap: 1.7rem;
 
   h1 {
     font-size: 30px;
@@ -23,4 +23,12 @@
   right: 3%;
   bottom: 24%;
   color: gray;
+}
+.error__message {
+  position: absolute;
+  left: 0;
+  bottom: -16px;
+  font-size: 12px;
+  color: red;
+  font-weight: "600";
 }

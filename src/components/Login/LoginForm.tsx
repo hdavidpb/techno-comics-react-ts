@@ -2,13 +2,13 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import useForms from "../../hooks/useForms";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import useChangeLoginForm from "../../hooks/useChangeLoginForm";
 
-interface IProps {
-  isLogin: boolean;
-  title: "Bienvenido" | "Registrate";
-}
-
-const LoginForm = ({ isLogin, title }: IProps) => {
+const LoginForm = () => {
+  const { loadingUser } = useSelector((store: RootState) => store.usersSlice);
+  const { handleChangeIsLogin, isLogin } = useChangeLoginForm();
   const {
     errors,
     handleBlur,
@@ -19,35 +19,42 @@ const LoginForm = ({ isLogin, title }: IProps) => {
     showPassVisibility,
     handleShowPassword,
   } = useForms({ isLogin });
+
   return (
     <form className="form__container" onSubmit={handleSubmit}>
-      <h1>{title}</h1>
-      <TextField
-        name="email"
-        onBlur={handleBlur}
-        onChange={handleChange}
-        fullWidth
-        id="outlined-basic"
-        label="Email"
-        variant="outlined"
-        type="email"
-        //@ts-ignore
-        error={errors.email && touched.email}
-        helperText={errors.password && touched.password ? "Requerido" : ""}
-      />
+      <h1>{isLogin ? "Iniciar Sesión" : "Registrate"}</h1>
       <div className="input_container">
         <TextField
-          name="password"
+          name="email"
+          value={values.email}
           onBlur={handleBlur}
           onChange={handleChange}
           fullWidth
-          id="outlined-basic"
+          id="email-basic"
+          label="Email"
+          variant="outlined"
+          type="email"
+          //@ts-ignore
+          error={errors.email && touched.email}
+        />
+        {errors.email && touched.email && (
+          <span className="error__message ">{errors.email}</span>
+        )}
+      </div>
+
+      <div className="input_container">
+        <TextField
+          name="password"
+          value={values.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          fullWidth
+          id="password-basic"
           label="Contraseña"
           variant="outlined"
-          type="password"
+          type={showPassVisibility ? "text" : "password"}
           //@ts-ignore
           error={errors.password && touched.password}
-          helperText={errors.password && touched.password ? "Requerido" : ""}
         />
         <button
           className="btn-show-pass"
@@ -60,12 +67,15 @@ const LoginForm = ({ isLogin, title }: IProps) => {
             <VisibilityOffOutlinedIcon />
           )}
         </button>
+        {errors.password && touched.password && (
+          <span className="error__message ">{errors.password}</span>
+        )}
       </div>
 
-      <Button type="submit" variant="outlined">
+      <Button disabled={loadingUser} type="submit" variant="outlined">
         {isLogin ? "Ingresar" : "Registrar"}
       </Button>
-      <Button type="button" variant="text">
+      <Button type="button" variant="text" onClick={handleChangeIsLogin}>
         {isLogin ? "Registrate" : "Ya tengo cuenta"}
       </Button>
     </form>

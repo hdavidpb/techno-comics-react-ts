@@ -1,14 +1,25 @@
 interface IProps {
-  width: string;
-  height: string;
-
+  widthImage: string;
+  heightImage: string;
+  heightContainer?: string;
   backgroundColor: string;
 }
-const Loader = ({ width, height, backgroundColor }: IProps) => {
+const Loader = ({
+  widthImage,
+  heightImage,
+  backgroundColor,
+  heightContainer,
+}: IProps) => {
   return (
-    <div className="fallback__container" style={{ backgroundColor }}>
+    <div
+      className="fallback__container"
+      style={{
+        backgroundColor,
+        height: heightContainer ? heightContainer : "100vh",
+      }}
+    >
       <img
-        style={{ width, height }}
+        style={{ width: widthImage, height: heightImage }}
         src="https://media.giphy.com/media/vBjLa5DQwwxbi/giphy.gif"
         alt="Cargando..."
       />

@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
-import { signOutUser } from "../redux/features/users/services";
-import { AppDispatch } from "../redux/store";
 
 const useAppMenu = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -17,15 +14,17 @@ const useAppMenu = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (item: string) => {
+    if (item === "Comics") {
+      navigate("/");
+    }
+    if (item === "Favoritos") {
+      navigate("/favorites");
+    }
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = (item: string) => {
-    if (item === "Cerrar Sesión") {
-      dispatch(signOutUser());
-    }
-
+  const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 

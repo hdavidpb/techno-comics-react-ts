@@ -3,6 +3,7 @@ export interface ILoginValues {
   password: string;
 }
 
-export enum characterActionsType {
-  "all characters" = "all characters",
+export enum pathNameType {
+  comics = "/",
+  favorites = "/favorites",
 }

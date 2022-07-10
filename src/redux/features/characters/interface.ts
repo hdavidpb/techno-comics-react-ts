@@ -1,6 +1,12 @@
 export interface IInitialState {
   charactersData: null | ICharacterData;
+  offsetCharacters: number;
   favorites: ICharacterResults[];
+  renderFavorites: ICharacterResults[];
+  loadingFavorites: boolean;
+  characterDetail: null | ICharacterData;
+  variantsData: null | ICharacterData;
+  loadingVariants: boolean;
   loadingCharacters: boolean;
 }
 
@@ -34,6 +40,9 @@ export interface ICharacterResults {
   stories: Stories;
   events: Comics;
   urls: URL[];
+  isFavorite?: boolean;
+  userID?: string;
+  docId?: string;
 }
 
 export interface Comics {

@@ -7,6 +7,7 @@
   align-items: center;
   gap: 18px;
   list-style: none;
+  padding: 0 10px;
 }
 
 .paginateItemContainer {
@@ -25,7 +26,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #6b63ff91;
+  background: rgb(14 1 252 / 53%);
   border-radius: 50%;
   color: white;
   font-size: 12px;
@@ -33,12 +34,12 @@
 }
 
 .activePage {
-  background: #6c63ff;
+  background: rgb(14, 1, 252);
 }
 
 .previous,
 .next {
-  color: #6c63ff;
+  color: rgb(14, 1, 252);
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;

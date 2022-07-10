@@ -10,3 +10,15 @@ button {
   cursor: pointer;
   background-color: transparent;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: red;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(128, 128, 128, 0.69);
+}

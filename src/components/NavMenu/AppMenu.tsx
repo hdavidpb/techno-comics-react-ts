@@ -1,23 +1,34 @@
-import * as MUI from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Box } from "@mui/system";
 import { pages, settings } from "../../utils/utils";
+import MenuIcon from "@mui/icons-material/Menu";
+import AdbIcon from "@mui/icons-material/Adb";
+import LogoutIcon from "@mui/icons-material/Logout";
 import useAppMenu from "../../hooks/useAppMenu";
 import SearchBar from "../Searchbar/SearchBar";
+import * as MUI from "@mui/material";
+import { signOutUser } from "../../redux/features/users/services";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 
 const AppMenu = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const pathName = window.location.pathname;
   const {
     anchorElNav,
-    anchorElUser,
+
     handleCloseNavMenu,
-    handleCloseUserMenu,
+
     handleOpenNavMenu,
-    handleOpenUserMenu,
   } = useAppMenu();
 
   return (
-    <MUI.AppBar position="static">
+    <MUI.AppBar
+      position="static"
+      sx={{
+        backgroundImage:
+          "linear-gradient(140deg, #8159e1 0%, #0112fb 50%, #e21212 75%)",
+      }}
+    >
       <MUI.Container maxWidth="xl">
         <MUI.Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -68,19 +79,28 @@ const AppMenu = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MUI.MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <MUI.Typography textAlign="center">{page}</MUI.Typography>
+              {pathName !== "/" && (
+                <MUI.MenuItem onClick={() => handleCloseNavMenu("Comics")}>
+                  <MUI.Typography textAlign="center">{"Comics"}</MUI.Typography>
                 </MUI.MenuItem>
-              ))}
+              )}
+
+              {pathName !== "/favorites" && (
+                <MUI.MenuItem onClick={() => handleCloseNavMenu("Favoritos")}>
+                  <MUI.Typography textAlign="center">
+                    {"Favoritos"}
+                  </MUI.Typography>
+                </MUI.MenuItem>
+              )}
             </MUI.Menu>
           </Box>
 
           <MUI.Typography
             variant="h5"
             noWrap
-            component="a"
+            component="div"
             sx={{
+              width: "100%",
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
@@ -95,55 +115,35 @@ const AppMenu = () => {
           </MUI.Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pathName !== "/favorites" && (
               <MUI.Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu("Favoritos")}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {"Favoritos"}
               </MUI.Button>
-            ))}
-            {/* <MUI.MenuItem>
-              <MUI.TextField type="text" placeholder="Buscar..." />
-            </MUI.MenuItem> */}
+            )}
+            {pathName !== "/" && (
+              <MUI.Button
+                onClick={() => handleCloseNavMenu("Comics")}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {"Comics"}
+              </MUI.Button>
+            )}
+
             <SearchBar margin="auto" width="70%" />
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <MUI.Tooltip title="Open settings">
-              <MUI.IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <MUI.Avatar
-                  alt="Remy Sharp"
-                  src="/static/images/avatar/2.jpg"
-                />
+            <MUI.Tooltip title="Logout">
+              <MUI.IconButton
+                onClick={() => dispatch(signOutUser())}
+                sx={{ p: 0, color: "#FFFFFF" }}
+              >
+                <LogoutIcon sx={{ fontSize: 32 }} />
               </MUI.IconButton>
             </MUI.Tooltip>
-            <MUI.Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MUI.MenuItem
-                  key={setting}
-                  onClick={() => handleCloseUserMenu(setting)}
-                >
-                  <MUI.Typography textAlign="center">{setting}</MUI.Typography>
-                </MUI.MenuItem>
-              ))}
-            </MUI.Menu>
           </Box>
         </MUI.Toolbar>
       </MUI.Container>

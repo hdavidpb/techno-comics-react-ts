@@ -4,7 +4,12 @@ import Loader from "../components/Fallback/Loader";
 import ProtectedRoutes from "../components/ProtectedRoutes";
 
 const UserRegister = lazy(() => import("../pages/userRegister/UserRegister"));
-const ComicsPage = lazy(() => import("../pages/comics/ComicsPage"));
+const CharactersPage = lazy(() => import("../pages/characters/CharactersPage"));
+const CharacterDetail = lazy(
+  () => import("../pages/characterDetail/CharacterDetail")
+);
+
+const FavoritesPage = lazy(() => import("../pages/favorites/FavoritesPage"));
 
 const MainRoutes = () => {
   return (
@@ -12,8 +17,8 @@ const MainRoutes = () => {
       fallback={
         <Loader
           backgroundColor="rgb(0 0 0 / 89%)"
-          width="366px"
-          height="150px"
+          widthImage="366px"
+          heightImage="150px"
         />
       }
     >
@@ -23,7 +28,23 @@ const MainRoutes = () => {
           path="/"
           element={
             <ProtectedRoutes>
-              <ComicsPage />
+              <CharactersPage />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/character/:id/:name"
+          element={
+            <ProtectedRoutes>
+              <CharacterDetail />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <ProtectedRoutes>
+              <FavoritesPage />
             </ProtectedRoutes>
           }
         />

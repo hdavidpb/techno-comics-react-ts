@@ -1,5 +1,5 @@
 export interface IInitialState {
-  user: boolean | null | IUser;
+  user: IUser | boolean | null;
   loadingUser: boolean;
 }
 

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { setChangeOffsetCharacters } from "../redux/features/characters/characterSlice";
 import { getComicsCharacter } from "../redux/features/characters/services";
 import { AppDispatch } from "../redux/store";
-import { characterActionsType } from "./interfaces";
+import { pathNameType } from "./interfaces";
 
 interface IProps {
-  type: characterActionsType;
+  type: string;
   totalRegisters: number | undefined;
   limit: number | undefined;
 }
@@ -15,8 +16,9 @@ const usePaginate = ({ type, limit, totalRegisters }: IProps) => {
 
   const handleChangePage = ({ selected }: { selected: number }) => {
     const offset = selected * 100;
-    if (type === characterActionsType["all characters"]) {
+    if (type === pathNameType.comics) {
       dispatch(getComicsCharacter({ offset }));
+      dispatch(setChangeOffsetCharacters(offset));
       return;
     }
   };

@@ -63,9 +63,9 @@ export const signOutUser = createAsyncThunk(
   "sign-out-user-action",
   async () => {
     try {
-      const res = await signOut(auth);
+      await signOut(auth);
 
-      return res;
+      return null;
     } catch (error: any) {
       console.log(error);
     }

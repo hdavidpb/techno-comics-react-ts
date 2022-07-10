@@ -1,27 +1,28 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
+import { AppDispatch, RootState } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
-import { auth } from "./firebase";
+import { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { getComicsCharacter } from "./redux/features/characters/services";
 import MainRoutes from "./routes/MainRoutes";
+import AppMenu from "./components/NavMenu/AppMenu";
+import useSuscribeUser from "./hooks/useSuscribeUser";
+import Loader from "./components/Fallback/Loader";
 
 function App() {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.email;
-      console.log(uid);
-      // ...
-    } else {
-      console.log("NO LOGGED");
-      // User is signed out
-      // ...
-    }
-  });
+  useSuscribeUser();
+  const dispatch = useDispatch<AppDispatch>();
+  const { user } = useSelector((store: RootState) => store.usersSlice);
 
-  return (
+  useEffect(() => {
+    dispatch(getComicsCharacter({}));
+  }, []);
+  return user === false ? (
+    <Loader backgroundColor="rgb(0 0 0 / 89%)" width="366px" height="150px" />
+  ) : (
     <div className="app__container">
       <BrowserRouter>
+        {user && <AppMenu />}
         <MainRoutes />
       </BrowserRouter>
       <Toaster />

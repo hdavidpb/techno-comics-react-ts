@@ -6,7 +6,11 @@
 @use "./sass/base/base";
 
 /*COMPONENTS*/
+@use "./components/components";
 @use "./components/Login/login";
+@use "./components/Fallback/Fallback";
+@use "./components/Searchbar/searchbar";
 
 /*PAGES*/
 @use "./pages/userRegister/userRegister";
+@use "./pages/comics/comics";

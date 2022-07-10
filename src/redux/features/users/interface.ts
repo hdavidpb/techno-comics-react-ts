@@ -1,12 +1,12 @@
 export interface IInitialState {
-  user: null | IUser;
+  user: boolean | null | IUser;
   loadingUser: boolean;
 }
 
 export interface IUser {
   uid: string;
   displayName: string | null;
-  accessToken?: string;
+
   email: string | null;
   photoURL: string | null;
 }

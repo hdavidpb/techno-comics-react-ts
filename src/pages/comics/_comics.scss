@@ -1,0 +1,19 @@
+@use "../../sass/abstracts/mixings";
+
+.comicsPage__container {
+  width: 100%;
+  height: 90vh;
+
+  @include mixings.flexContainer(column);
+  gap: 10px;
+}
+
+.characters__container {
+  width: 100%;
+  flex: 1;
+  @include mixings.flexContainer(row);
+  gap: 14px;
+  padding: 1rem;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}

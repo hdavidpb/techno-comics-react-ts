@@ -1,18 +1,21 @@
 import { useFormik } from "formik";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUsers, userLogin } from "../redux/features/users/services";
 import { ILoginValues } from "./interfaces";
+import { AppDispatch, RootState } from "../redux/store";
 import * as Yup from "yup";
-import { AppDispatch } from "../redux/store";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   isLogin: boolean;
 }
 
 const useForms = ({ isLogin }: IProps) => {
-  const [showPassVisibility, setShowPassVisibility] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const { user } = useSelector((store: RootState) => store.usersSlice);
+  const [showPassVisibility, setShowPassVisibility] = useState(false);
 
   const initialValues: ILoginValues = {
     email: "",
@@ -56,6 +59,12 @@ const useForms = ({ isLogin }: IProps) => {
       return !prev;
     });
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return {
     showPassVisibility,

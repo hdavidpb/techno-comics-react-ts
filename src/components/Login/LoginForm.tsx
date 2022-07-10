@@ -5,6 +5,7 @@ import useForms from "../../hooks/useForms";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import useChangeLoginForm from "../../hooks/useChangeLoginForm";
+import { useState } from "react";
 
 const LoginForm = () => {
   const { loadingUser } = useSelector((store: RootState) => store.usersSlice);
@@ -22,6 +23,16 @@ const LoginForm = () => {
 
   return (
     <form className="form__container" onSubmit={handleSubmit}>
+      <div className="avatar__icon">
+        <img
+          src={
+            isLogin
+              ? "https://i.pinimg.com/originals/f4/69/a1/f469a123dffcd7a59307da16a83fe5aa.png"
+              : "https://i.pinimg.com/originals/44/8a/75/448a75969350b06146aba254341b5108.jpg"
+          }
+          alt="avatar"
+        />
+      </div>
       <h1>{isLogin ? "Iniciar Sesión" : "Registrate"}</h1>
       <div className="input_container">
         <TextField
@@ -72,10 +83,16 @@ const LoginForm = () => {
         )}
       </div>
 
-      <Button disabled={loadingUser} type="submit" variant="outlined">
+      <Button disabled={loadingUser} type="submit" variant="contained">
         {isLogin ? "Ingresar" : "Registrar"}
       </Button>
-      <Button type="button" variant="text" onClick={handleChangeIsLogin}>
+      <Button
+        type="button"
+        variant="text"
+        onClick={handleChangeIsLogin}
+        color="primary"
+        style={{ fontWeight: "bold" }}
+      >
         {isLogin ? "Registrate" : "Ya tengo cuenta"}
       </Button>
     </form>

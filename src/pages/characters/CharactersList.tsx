@@ -25,7 +25,7 @@ const CharacterList = ({ results, loading }: IProps) => {
         ))
       ) : (
         <Loader
-          heightContainer="100%"
+          heightContainer="75vh"
           widthImage="287px"
           heightImage="150px"
           backgroundColor="transparent"

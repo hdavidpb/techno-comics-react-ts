@@ -24,11 +24,10 @@ export const getComicsCharacter = createAsyncThunk(
     try {
       const res = await axios.get<ICharacterDataResponse>(`${API}/${QUERYURL}`);
       const { data } = res.data;
-      console.log(data);
+
       return data;
     } catch (error) {
-      errorAlert("Algo salio mal");
-      console.log(error);
+      errorAlert("Something went wrong");
     }
   }
 );
@@ -41,11 +40,10 @@ export const getCharacterById = createAsyncThunk(
     try {
       const res = await axios.get<ICharacterDataResponse>(`${API}/${QUERYURL}`);
       const { data } = res.data;
-      console.log(data);
+
       return data;
     } catch (error) {
-      errorAlert("Algo salio mal");
-      console.log(error);
+      errorAlert("Something went wrong");
     }
   }
 );
@@ -61,11 +59,10 @@ export const getCharactersVariants = createAsyncThunk(
     try {
       const res = await axios.get<ICharacterDataResponse>(`${API}/${QUERYURL}`);
       const { data } = res.data;
-      console.log(data);
+
       return data;
     } catch (error) {
-      errorAlert("Algo salio mal");
-      console.log(error);
+      errorAlert("Something went wrong");
     }
   }
 );

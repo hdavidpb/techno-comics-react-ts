@@ -12,9 +12,7 @@ const useSuscribeUser = () => {
         const { email, photoURL, uid, displayName } = userData;
         const user = { email, photoURL, uid, displayName };
         dispatch(getLoggedUser(user));
-        console.log(userData);
       } else {
-        console.log(userData);
         dispatch(getLoggedUser(null));
       }
     });

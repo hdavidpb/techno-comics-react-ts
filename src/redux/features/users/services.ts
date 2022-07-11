@@ -15,16 +15,14 @@ export const registerUsers = createAsyncThunk(
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      console.log(res);
       successAlert("Usuario registrado con exito!");
       return res;
     } catch (error: any) {
       const errorCode = error.code;
-      const errorMessage = error.message;
+
       if (errorCode === authErrorType.userInUse) {
         errorAlert("Este email ya se encuentra registrado!");
       }
-      console.log({ errorCode, errorMessage });
     }
   }
 );
@@ -44,7 +42,6 @@ export const userLogin = createAsyncThunk(
       return user;
     } catch (error: any) {
       const errorCode = error.code;
-      const errorMessage = error.message;
 
       if (errorCode === authErrorType.userNotFound) {
         errorAlert("Usuario y/o contraseña invalidos");
@@ -54,7 +51,6 @@ export const userLogin = createAsyncThunk(
         errorAlert("Usuario y/o contraseña invalidos");
         return;
       }
-      console.log({ errorCode, errorMessage });
     }
   }
 );
@@ -67,7 +63,7 @@ export const signOutUser = createAsyncThunk(
 
       return null;
     } catch (error: any) {
-      console.log(error);
+      errorAlert("Something went wrong");
     }
   }
 );

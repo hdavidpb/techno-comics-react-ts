@@ -36,7 +36,6 @@ const useHandleFavorites = ({ pathName }: IProps) => {
       await deleteDoc(doc(db, "charactersFavorites", docId));
       dispatch(setRemoveFromFavorites(docId));
     } catch (error) {
-      console.log(error);
       errorAlert("something went wrong");
     }
   };
@@ -73,11 +72,10 @@ const useHandleFavorites = ({ pathName }: IProps) => {
         docId: doc.id,
         ...doc.data(),
       })) as ICharacterResults[];
-      console.log(data);
+
       dispatch(setGetAllFavoritesFromUser(data));
       dispatch(setLoadingFavorites(false));
     } catch (error) {
-      console.log("ERROR");
       errorAlert("Error getting favorites from Firestore");
       dispatch(setLoadingFavorites(false));
     }

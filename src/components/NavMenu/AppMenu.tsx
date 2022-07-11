@@ -32,6 +32,7 @@ const AppMenu = () => {
       <MUI.Container maxWidth="xl">
         <MUI.Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+
           <MUI.Typography
             variant="h6"
             noWrap
@@ -47,7 +48,7 @@ const AppMenu = () => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            MARVEL
           </MUI.Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

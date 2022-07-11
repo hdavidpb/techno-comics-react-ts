@@ -4,6 +4,7 @@ import Loader from "../../components/Fallback/Loader";
 import useScrollDetected from "../../hooks/useScrollDetected";
 import { ICharacterResults } from "../../redux/features/characters/interface";
 import { RootState } from "../../redux/store";
+import NoResults from "../characterDetail/NoResults";
 import CharactersCard from "./CharactersCard";
 
 interface IProps {
@@ -12,7 +13,9 @@ interface IProps {
 }
 
 const CharacterList = ({ results, loading }: IProps) => {
-  //const { containerRef, handleChangeScrollTop } = useScrollDetected();
+  const { favorites } = useSelector(
+    (store: RootState) => store.charactersSlice
+  );
 
   return (
     <div className="characters__container">
@@ -23,9 +26,9 @@ const CharacterList = ({ results, loading }: IProps) => {
       ) : (
         <Loader
           heightContainer="100%"
-          widthImage="157px"
-          heightImage="80px"
-          backgroundColor="#FFFFFF"
+          widthImage="287px"
+          heightImage="150px"
+          backgroundColor="transparent"
         />
       )}
     </div>

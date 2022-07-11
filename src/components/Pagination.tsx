@@ -12,7 +12,7 @@ const Pagination = ({ pageCount, onPageChange, offset }: IProps) => {
       breakLabel="..."
       nextLabel=">"
       onPageChange={onPageChange}
-      pageRangeDisplayed={5}
+      pageRangeDisplayed={3}
       pageCount={pageCount}
       previousLabel="<"
       containerClassName={"paginateContainer"}

@@ -1,13 +1,14 @@
 /***************** PAGINATION STYLES *************/
 
 .paginateContainer {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 18px;
   list-style: none;
-  padding: 0 10px;
+  padding: 10px 11px;
+  background: #ffffffc4;
+  border-radius: 6px;
 }
 
 .paginateItemContainer {

@@ -49,6 +49,13 @@ const charactersSlice = createSlice({
     setChangeOffsetCharacters: (state, action: PayloadAction<number>) => {
       state.offsetCharacters = action.payload;
     },
+    setChangeIsAddinToFavorites: (state, action: PayloadAction<number>) => {
+      state.charactersData!.results.forEach((character) => {
+        if (character.id === action.payload) {
+          character.isAdding = !character.isAdding;
+        }
+      });
+    },
   },
   extraReducers: ({ addCase }) => {
     addCase(getComicsCharacter.pending, (state) => {
@@ -79,6 +86,12 @@ const charactersSlice = createSlice({
       state.loadingFavorites = false;
       if (payload) {
         state.favorites = [...state.favorites, payload];
+
+        state.charactersData!.results.forEach((character) => {
+          if (character.id === payload.id) {
+            character.isAdding = !character.isAdding;
+          }
+        });
       }
     });
   },
@@ -90,6 +103,7 @@ export const {
   setRemoveFromFavorites,
   setChangeOffsetCharacters,
   setGetAllFavoritesFromUser,
+  setChangeIsAddinToFavorites,
 } = charactersSlice.actions;
 
 export default charactersSlice.reducer;

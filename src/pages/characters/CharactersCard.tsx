@@ -36,7 +36,7 @@ const ComicCard = ({ character }: IProps) => {
         </MUI.Typography>
       </MUI.CardContent>
       <MUI.CardActions sx={{ justifyContent: "space-between" }}>
-        {loadingFavorites ? (
+        {character.isAdding ? (
           <MUI.CircularProgress />
         ) : (
           <MUI.IconButton

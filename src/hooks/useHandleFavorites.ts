@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../firebase";
 import {
+  setChangeIsAddinToFavorites,
   setGetAllFavoritesFromUser,
   setLoadingFavorites,
   setRemoveFromFavorites,
@@ -48,6 +49,7 @@ const useHandleFavorites = ({ pathName }: IProps) => {
       const characterRef = favorites.find((char) => char.id === character.id);
       if (characterRef === undefined) {
         dispatch(addCharacterToUserFavorites(character));
+        dispatch(setChangeIsAddinToFavorites(character.id));
       } else {
         errorAlert("Character is already added to your favorites");
       }

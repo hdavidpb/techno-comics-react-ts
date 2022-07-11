@@ -41,6 +41,7 @@ export interface ICharacterResults {
   events: Comics;
   urls: URL[];
   isFavorite?: boolean;
+  isAdding?: boolean;
   userID?: string;
   docId?: string;
 }

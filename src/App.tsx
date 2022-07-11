@@ -12,9 +12,9 @@ import useHandleFavorites from "./hooks/useHandleFavorites";
 
 function App() {
   const { handleGetFavoritesFromUser } = useHandleFavorites({});
-  useSuscribeUser();
   const { user } = useSelector((store: RootState) => store.usersSlice);
 
+  useSuscribeUser();
   useEffect(() => {
     if (user) {
       //@ts-ignore
@@ -23,7 +23,13 @@ function App() {
     }
   }, [user]);
 
-  return (
+  return user === false ? (
+    <Loader
+      backgroundColor="rgb(0 0 0 / 89%)"
+      widthImage="366px"
+      heightImage="150px"
+    />
+  ) : (
     <div className="app__container">
       <BrowserRouter>
         {user && <AppMenu />}

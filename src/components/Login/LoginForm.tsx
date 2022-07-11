@@ -1,9 +1,10 @@
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
+import useChangeLoginForm from "../../hooks/useChangeLoginForm";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import useChangeLoginForm from "../../hooks/useChangeLoginForm";
+import * as MUI from "@mui/material";
 
 import useForms from "../../hooks/useForms";
 
@@ -35,7 +36,7 @@ const LoginForm = () => {
       </div>
       <h1>{isLogin ? "Iniciar Sesión" : "Registrate"}</h1>
       <div className="input_container">
-        <TextField
+        <MUI.TextField
           name="email"
           value={values.email}
           onBlur={handleBlur}
@@ -54,7 +55,7 @@ const LoginForm = () => {
       </div>
 
       <div className="input_container">
-        <TextField
+        <MUI.TextField
           name="password"
           value={values.password}
           onBlur={handleBlur}
@@ -83,10 +84,15 @@ const LoginForm = () => {
         )}
       </div>
 
-      <Button disabled={loadingUser} type="submit" variant="contained">
-        {isLogin ? "Ingresar" : "Registrar"}
-      </Button>
-      <Button
+      {loadingUser ? (
+        <MUI.CircularProgress />
+      ) : (
+        <MUI.Button disabled={loadingUser} type="submit" variant="contained">
+          {isLogin ? "Ingresar" : "Registrar"}
+        </MUI.Button>
+      )}
+
+      <MUI.Button
         type="button"
         variant="text"
         onClick={handleChangeIsLogin}
@@ -94,7 +100,7 @@ const LoginForm = () => {
         style={{ fontWeight: "bold" }}
       >
         {isLogin ? "Registrate" : "Ya tengo cuenta"}
-      </Button>
+      </MUI.Button>
     </form>
   );
 };

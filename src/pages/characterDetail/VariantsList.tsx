@@ -21,7 +21,7 @@ const VariantsList = () => {
 
   return (
     <div className="variants__container">
-      <h3>Variantes</h3>
+      <h3>Variants</h3>
       {variantsData?.results.length === 1 ? (
         <span>This Character not have any variants</span>
       ) : (

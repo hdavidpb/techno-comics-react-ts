@@ -12,14 +12,9 @@ import { AppDispatch } from "../../redux/store";
 
 const AppMenu = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const pathName = window.location.pathname;
-  const {
-    anchorElNav,
+  const pathName = window.location.pathname.slice(0, 10);
 
-    handleCloseNavMenu,
-
-    handleOpenNavMenu,
-  } = useAppMenu();
+  const { anchorElNav, handleCloseNavMenu, handleOpenNavMenu } = useAppMenu();
 
   return (
     <MUI.AppBar
@@ -81,15 +76,17 @@ const AppMenu = () => {
               }}
             >
               {pathName !== "/" && (
-                <MUI.MenuItem onClick={() => handleCloseNavMenu("Comics")}>
-                  <MUI.Typography textAlign="center">{"Comics"}</MUI.Typography>
+                <MUI.MenuItem onClick={() => handleCloseNavMenu("Characters")}>
+                  <MUI.Typography textAlign="center">
+                    {"Characters"}
+                  </MUI.Typography>
                 </MUI.MenuItem>
               )}
 
               {pathName !== "/favorites" && (
-                <MUI.MenuItem onClick={() => handleCloseNavMenu("Favoritos")}>
+                <MUI.MenuItem onClick={() => handleCloseNavMenu("Favorites")}>
                   <MUI.Typography textAlign="center">
-                    {"Favoritos"}
+                    {"Favorites"}
                   </MUI.Typography>
                 </MUI.MenuItem>
               )}
@@ -112,28 +109,31 @@ const AppMenu = () => {
               textDecoration: "none",
             }}
           >
-            <SearchBar margin={"0"} width="100%" />
+            {pathName !== "/character" && (
+              <SearchBar margin={"0"} width="100%" />
+            )}
           </MUI.Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pathName !== "/favorites" && (
               <MUI.Button
-                onClick={() => handleCloseNavMenu("Favoritos")}
+                onClick={() => handleCloseNavMenu("Favorites")}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {"Favoritos"}
+                {"Favorites"}
               </MUI.Button>
             )}
             {pathName !== "/" && (
               <MUI.Button
-                onClick={() => handleCloseNavMenu("Comics")}
+                onClick={() => handleCloseNavMenu("Characters")}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {"Comics"}
+                {"Characters"}
               </MUI.Button>
             )}
-
-            <SearchBar margin="auto" width="70%" />
+            {pathName !== "/character" && (
+              <SearchBar margin="auto" width="70%" />
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

@@ -15,10 +15,10 @@ const useAppMenu = () => {
   };
 
   const handleCloseNavMenu = (item: string) => {
-    if (item === "Comics") {
+    if (item === "Characters") {
       navigate("/");
     }
-    if (item === "Favoritos") {
+    if (item === "Favorites") {
       navigate("/favorites");
     }
     setAnchorElNav(null);

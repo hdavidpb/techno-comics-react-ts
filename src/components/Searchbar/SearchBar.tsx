@@ -14,7 +14,7 @@ const SearchBar = ({ margin, width }: IProps) => {
   return (
     <div className="search__input_container" style={{ margin, width }}>
       <TextField
-        placeholder="Buscar..."
+        placeholder="Seacrh..."
         fullWidth
         inputProps={{ style: { padding: "11.5px 10px" } }}
         onChange={handleChangeFilterValue}

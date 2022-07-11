@@ -55,7 +55,7 @@ const ComicCard = ({ character }: IProps) => {
           variant="outlined"
           onClick={() => handleCharacterDetail(character.id, character.name)}
         >
-          Ver más
+          More
         </MUI.Button>
       </MUI.CardActions>
     </MUI.Card>
